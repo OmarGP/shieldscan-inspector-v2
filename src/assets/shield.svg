@@ -1,0 +1,19 @@
+<svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+  <!-- Borde exterior -->
+  <path
+    d="M60 5 L110 30 L110 80 L60 135 L10 80 L10 30 Z"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="8"
+    stroke-linejoin="round"
+  />
+
+  <!-- Cuerpo del escudo -->
+  <path
+    d="M60 15 L100 35 L100 75 L60 125 L20 75 L20 35 Z"
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+</svg>

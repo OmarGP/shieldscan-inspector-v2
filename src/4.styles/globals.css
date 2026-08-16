@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: Verdana, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+ .notranslate {
+  translate: no;
+ }
+
+ .shield-shape {
+  clip-path: polygon(
+    50% 0%,
+    90% 15%,
+    90% 75%,
+    50%100%,
+    10% 75%,
+    10% 15%
+  );
+}

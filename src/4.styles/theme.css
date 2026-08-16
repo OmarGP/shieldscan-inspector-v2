@@ -1,0 +1,69 @@
+/* ============================
+   MODO CLARO (por defecto)
+   ============================ */
+:root {
+  /* Fondo */
+  --bg-main: #ffffff;
+  --bg-panel: #FFFFFF;
+  --bg-card: #6397f760;
+
+  /* Bordes */
+  --border-soft: #D1D5DB;
+
+  /* Texto */
+  --text-main: #1F2937;
+  --text-secondary: #4B5563;
+  --text-disabled: #9CA3AF;
+  --placeholder-color: #acadafde;
+
+  /* Hover visible */
+  --bg-hover-strong: #E2E8F0;
+
+  /* Acentos */
+  --accent-cyan: #06B6D4;
+
+  /* Transición suave */
+  --transition-speed: 300ms;
+}
+
+/* ============================
+   MODO OSCURO (solo con .dark)
+   ============================ */
+:root.dark {
+  /* Fondo */
+  --bg-main: #193155;
+  --bg-panel: #1c2430;
+  --bg-card: #22e9f038;
+
+  /* Bordes */
+  --border-soft: #2A3039;
+
+  /* Texto */
+  --text-main: #E6E6E6;
+  --text-secondary: #9BA3B0;
+  --text-disabled: #6C737C;
+  --placeholder-color: #9b9da1;
+
+  /* Hover visible */
+  --bg-hover-strong: #2A3039;
+
+  /* Acentos */
+  --accent-cyan: #06B6D4;
+}
+
+/* ============================
+   TRANSICIÓN GLOBAL (FADE)
+   ============================ */
+html, body, button, input, div, section {
+  transition: background-color var(--transition-speed),
+              color var(--transition-speed),
+              border-color var(--transition-speed);
+}
+
+@theme {
+  --color-bg-card: var(--bg-card);
+  --color-text-main: var(--text-main);
+  --color-border-soft: var(--border-soft);
+  --color-bg-hover-strong: var(--bg-hover-strong);
+  --color-accent-cyan: var(--accent-cyan);
+}
