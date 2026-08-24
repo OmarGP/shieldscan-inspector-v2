@@ -9,16 +9,5 @@ body {
   padding: 0;
 }
  .notranslate {
-  translate: no;
+  unicode-bidi: isolate;
  }
-
- .shield-shape {
-  clip-path: polygon(
-    50% 0%,
-    90% 15%,
-    90% 75%,
-    50%100%,
-    10% 75%,
-    10% 15%
-  );
-}

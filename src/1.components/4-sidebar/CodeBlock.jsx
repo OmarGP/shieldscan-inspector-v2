@@ -4,18 +4,17 @@ export default function CodeBlock({ title, code, showCopy = false }) {
     return (
         <div
             className="
-                bg-[--bg-card]
-                border border-[--border-soft]
+                border
                 rounded-lg
                 p-4
                 flex flex-col
                 gap-4
                 transition-all duration-200
-                hover:border-[--accent-cyan]
+                hover:border-accent-cyan
             "
         >
             {title && (
-                <h3 className="text-lg font-semibold text-[--text-main]">
+                <h3 className="text-lg font-semibold text-text-main">
                     {title}
                 </h3>
             )}
@@ -29,12 +28,12 @@ export default function CodeBlock({ title, code, showCopy = false }) {
             <pre
                 className="
                     text-sm
-                    text-[--text-secondary]
+                    text-text-secondary
                     whitespace-pre-wrap
-                    bg-[--bg-panel]
+                    bg-bg-panel
                     p-3
                     rounded-md
-                    border border-[--border-soft]
+                    border
                     overflow-auto
                 "
             >

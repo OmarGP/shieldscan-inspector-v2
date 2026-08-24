@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import HeaderInputArea from "./HeaderInputArea";
@@ -9,24 +10,59 @@ import SecurityCardsGrid from "./SecurityCardsGrid";
 import RecommendationsBox from "./RecommendationsBox";
 import { analyzeHeaders } from "../../3.utils/headerAnalysis";
 
-export default function AnalyzerPanel({ setRawHeaders }) {
+export default function AnalyzerPanel({ setRawHeaders, setAnalysisFromApp }) {
   const [headersFromUser, setHeadersFromUser] = useState({});
   const [externalHeaders, setExternalHeaders] = useState("");
+  const [url, setUrl] = useState("");
 
-  const analysis = analyzeHeaders(headersFromUser);
+  const [analysis, setAnalysis] = useState({
+    score: 0,
+    url: "",
+    results: {},
+    recommendations: [],
+  });
+
+  // Recalcular análisis cuando cambian las cabeceras
+  useEffect(() => {
+    const total = Object.keys(headersFromUser).length;
+
+    if (total === 0) {
+      const empty = {
+        score: 0,
+        url: "",
+        results: {},
+        recommendations: [],
+      };
+
+      setAnalysis(empty);
+      setAnalysisFromApp(empty);
+      return;
+    }
+
+    const result = analyzeHeaders(headersFromUser);
+    setAnalysis(result);
+    setAnalysisFromApp(result);
+  }, [headersFromUser, setAnalysisFromApp]);
 
   // Enviar cabeceras crudas al sidebar
   useEffect(() => {
+    const total = Object.keys(headersFromUser).length;
+
+    if (total === 0) {
+      setRawHeaders("");
+      return;
+    }
+
     setRawHeaders(JSON.stringify(headersFromUser, null, 2));
   }, [headersFromUser, setRawHeaders]);
 
-    console.log("totalHeaders:", Object.keys(headersFromUser).length);
-    console.log("score:", analysis.score);
-
   return (
-    <section className="p-6 rounded-lg bg-[--bg-panel] text-[--text-main] border border-[--border-soft]">
+    <section className="p-6 rounded-lg bg-bg-panel text-text-main border">
       <div className="mb-4">
-        <SearchBar setHeadersFromUser={setHeadersFromUser} />
+        <SearchBar
+          setHeadersFromUser={setHeadersFromUser}
+          setUrl={setUrl}
+        />
       </div>
 
       <HeaderInputArea
@@ -41,9 +77,8 @@ export default function AnalyzerPanel({ setRawHeaders }) {
 
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mt-6">
         <MetricsOverview
-          url={analysis.url}
-          totalHeaders={Object.keys(headersFromUser).length}
-          score={analysis.score}
+          url={url}
+          totalHeaders={Object.keys(headersFromUser || {}).length}
         />
 
         <SecurityScoreBadge score={analysis.score} />
@@ -51,7 +86,10 @@ export default function AnalyzerPanel({ setRawHeaders }) {
 
       <SecurityCardsGrid items={Object.values(analysis.results)} />
 
-      <RecommendationsBox items={analysis.recommendations} />
+      <RecommendationsBox
+        items={analysis.recommendations}
+        totalHeaders={Object.keys(headersFromUser).length}
+      />
     </section>
   );
 }

@@ -1,6 +1,6 @@
 // Contexto global para gestionar el modo claro/oscuro.
 // Permite usar useTheme() en cualquier componente.
-// Sincroniza el tema con tus variables CSS y lo guarda en localStorage.
+// Sincroniza el tema con variables CSS y lo guarda en localStorage.
 
 import { createContext, useEffect, useState } from "react";
 

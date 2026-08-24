@@ -1,14 +1,18 @@
 import { useState } from "react";
 import SearchButton from "./SearchButton";
 
-export default function SearchBar({ setHeadersFromUser }) {
-  const [url, setUrl] = useState("");
+export default function SearchBar({ setHeadersFromUser, setUrl }) {
+  
+  const [url, setLocalUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleAnalyze = async () => {
     if (!url) return;
 
     setLoading(true);
+    setUrl(url);
+    setErrorMsg("");
 
     try {
       const response = await fetch(url);
@@ -20,41 +24,47 @@ export default function SearchBar({ setHeadersFromUser }) {
 
       setHeadersFromUser(headersObj);
     } catch {
-      setHeadersFromUser({ error: "No se pudo analizar la URL" });
+      // Limpia cabeceras para que el análisis se resetee
+      setHeadersFromUser({});
+      setErrorMsg(
+        "No se pudieron obtener las cabeceras (CORS o URL inaccesible).",
+      );
     }
 
     setLoading(false);
   };
 
   return (
-    <div
-      className="
-                flex
-                items-center
-                w-full
-                bg-[--bg-card]
-                border border-[--border-soft]
-                rounded-lg
-                overflow-hidden
-            "
-    >
-      {/* Input */}
-      <input
-        type="text"
-        placeholder="Pega tu URL aquí..."
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
+    <div className="flex flex-col w-full gap-2">
+      <div
         className="
-                    w-full px-4 py-2
-                    bg-[--bg-card]
-                    text-[--text-main]
-                    placeholder:text-(--placeholder-color)
-                    focus:outline-none
-                "
-      />
+          flex
+          items-center
+          w-full
+          border
+          rounded-lg
+          overflow-hidden
+        "
+      >
+        {/* Input */}
+        <input
+          type="text"
+          placeholder="Pega tu URL aquí..."
+          value={url}
+          onChange={(e) => setLocalUrl(e.target.value)}
+          className="
+            w-full px-4 py-2
+            text-text-main
+            placeholder:text-placeholder-color
+            focus:outline-none
+          "
+        />
 
-      {/* Botón dentro de la barra */}
-      <SearchButton onClick={handleAnalyze} loading={loading} />
+        {/* Botón dentro de la barra */}
+        <SearchButton onClick={handleAnalyze} loading={loading} />
+      </div>
+
+      {errorMsg && <p className="text-sm text-red-400">{errorMsg}</p>}
     </div>
   );
 }

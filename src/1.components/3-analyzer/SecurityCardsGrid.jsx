@@ -21,7 +21,7 @@ export default function SecurityCardGrid({ items }) {
                 grid
                 grid-cols-1
                 md:grid-cols-2
-                xl:grid-cols-2
+                xl:grid-cols-3
                 gap-4
                 mt-6
             "

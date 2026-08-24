@@ -1,180 +1,101 @@
 // ===========================================================
 //  Motor de análisis de cabeceras HTTP para auditorías OWASP
 // ===========================================================
-
 // ------------------------------------------------------
 // 1) Funciones de análisis por cabecera
 // ------------------------------------------------------
 
-// HSTS (Strict-Transport-Security (HSTS))
 function checkHSTS(headers) {
-    const value = headers["strict-transport-security"];
-    if (!value) {
-        return danger("HSTS", "HSTS header missing.");
-    }
-
-    const hasMaxAge = value.includes("max-age");
-    const hasSubdomains = value.includes("includeSubDomains");
-
-    if (hasMaxAge && hasSubdomains) {
-        return success("HSTS", "HSTS is properly configured.");
-    }
-
-    return warning("HSTS", "HSTS is present but incomplete.");
+  const value = headers["strict-transport-security"];
+  if (!value) return danger("HSTS", "Falta Strict-Transport-Security.");
+  if (value.includes("max-age") && value.includes("includeSubDomains"))
+    return success("HSTS", "HSTS correctamente configurado.");
+  return warning("HSTS", "HSTS incompleto.");
 }
 
-// CSP (Content-Security-Policy)
 function checkCSP(headers) {
-    const value = headers["content-security-policy"];
-    if (!value) {
-        return danger("CSP", "CSP header missing.");
-    }
-
-    if (value.includes("default-src")) {
-        return success("CSP", "CSP is properly configured.");
-    }
-
-    return warning("CSP", "CSP is present but incomplete.");
+  const value = headers["content-security-policy"];
+  if (!value) return danger("CSP", "Falta Content-Security-Policy.");
+  if (value.includes("default-src"))
+    return success("CSP", "CSP correctamente configurado.");
+  return warning("CSP", "CSP incompleto o débil.");
 }
 
-// XFO (X-Frame-Options)
 function checkXFO(headers) {
-    const value = headers["x-frame-options"];
-    if (!value) {
-        return danger("X-Frame-Options", "X-Frame-Options missing.");
-    }
-
-    if (value === "DENY" || value === "SAMEORIGIN") {
-        return success("X-Frame-Options", "XFO is properly configured.");
-    }
-
-    return warning("X-Frame-Options", "XFO value is unusual.");
+  const value = headers["x-frame-options"];
+  if (!value) return danger("X-Frame-Options", "Falta X-Frame-Options.");
+  if (value === "DENY" || value === "SAMEORIGIN")
+    return success("X-Frame-Options", "XFO correctamente configurado.");
+  return warning("X-Frame-Options", "XFO con valor inusual.");
 }
 
-// XCTO (X-Content-Type-Options)
 function checkXCTO(headers) {
-    const value = headers["x-content-type-options"];
-    if (!value) {
-        return danger("X-Content-Type-Options", "X-Content-Type-Options missing.");
-    }
-
-    if (value === "nosniff") {
-        return success("X-Content-Type-Options", "XCTO is properly configured.");
-    }
-
-    return warning("X-Content-Type-Options", "XCTO value is unusual.");
+  const value = headers["x-content-type-options"];
+  if (!value) return danger("X-Content-Type-Options", "Falta X-Content-Type-Options.");
+  if (value === "nosniff")
+    return success("X-Content-Type-Options", "XCTO correctamente configurado.");
+  return warning("X-Content-Type-Options", "XCTO con valor inusual.");
 }
 
-// Referrer-Policy
 function checkReferrerPolicy(headers) {
-    const value = headers["referrer-policy"];
-    if (!value) {
-        return danger("Referrer-Policy", "Referrer-Policy missing.");
-    }
-
-    const goodValues = [
-        "strict-origin",
-        "strict-origin-when-cross-origin",
-        "no-referrer"
-    ];
-
-    if (goodValues.includes(value)) {
-        return success("Referrer-Policy", "Referrer-Policy is properly configured.");
-    }
-
-    return warning("Referrer-Policy", "Referrer-Policy is weak or unusual.");
+  const value = headers["referrer-policy"];
+  if (!value) return danger("Referrer-Policy", "Falta Referrer-Policy.");
+  const good = ["strict-origin", "strict-origin-when-cross-origin", "no-referrer"];
+  if (good.includes(value))
+    return success("Referrer-Policy", "Referrer-Policy correctamente configurado.");
+  return warning("Referrer-Policy", "Referrer-Policy débil o inusual.");
 }
 
-// Permissions-Policy
 function checkPermissionsPolicy(headers) {
-    const value = headers["permissions-policy"];
-    if (!value) {
-        return danger("Permissions-Policy", "Permissions-Policy missing.");
-    }
-
-    if (value.includes("camera=()") || value.includes("microphone=()")) {
-        return success("Permissions-Policy", "Permissions-Policy is properly configured.");
-    }
-
-    return warning("Permissions-Policy", "Permissions-Policy is present but incomplete.");
+  const value = headers["permissions-policy"];
+  if (!value) return danger("Permissions-Policy", "Falta Permissions-Policy.");
+  if (value.includes("camera=()") || value.includes("microphone=()"))
+    return success("Permissions-Policy", "Permissions-Policy correctamente configurado.");
+  return warning("Permissions-Policy", "Permissions-Policy incompleto.");
 }
 
-// CORP (Cross-Origin-Resource-Policy)
 function checkCORP(headers) {
-    const value = headers["cross-origin-resource-policy"];
-    if (!value) {
-        return danger("CORP", "CORP header missing.");
-    }
-
-    if (value === "same-origin" || value === "same-site") {
-        return success("CORP", "CORP is properly configured.");
-    }
-
-    return warning("CORP", "CORP value is unusual.");
+  const value = headers["cross-origin-resource-policy"];
+  if (!value) return danger("CORP", "Falta Cross-Origin-Resource-Policy.");
+  if (value === "same-origin" || value === "same-site")
+    return success("CORP", "CORP correctamente configurado.");
+  return warning("CORP", "CORP con valor inusual.");
 }
 
-// ------------------------------------------------------
-// 2) Cabeceras recomendadas (avanzadas)
-// ------------------------------------------------------
-
-// COOP (Cross-Origin-Opener-Policy)
 function checkCOOP(headers) {
-    const value = headers["cross-origin-opener-policy"];
-    if (!value) {
-        return warning("COOP", "COOP missing (recommended for isolation).");
-    }
-
-    if (value === "same-origin") {
-        return success("COOP", "COOP is properly configured.");
-    }
-
-    return warning("COOP", "COOP value is weak.");
+  const value = headers["cross-origin-opener-policy"];
+  if (!value) return warning("COOP", "Falta Cross-Origin-Opener-Policy (recomendado).");
+  if (value === "same-origin")
+    return success("COOP", "COOP correctamente configurado.");
+  return warning("COOP", "COOP débil.");
 }
 
-// COEP (Cross-Origin-Embedder-Policy)
 function checkCOEP(headers) {
-    const value = headers["cross-origin-embedder-policy"];
-    if (!value) {
-        return warning("COEP", "COEP missing (recommended for isolation).");
-    }
-
-    if (value === "require-corp") {
-        return success("COEP", "COEP is properly configured.");
-    }
-
-    return warning("COEP", "COEP value is weak.");
+  const value = headers["cross-origin-embedder-policy"];
+  if (!value) return warning("COEP", "Falta Cross-Origin-Embedder-Policy (recomendado).");
+  if (value === "require-corp")
+    return success("COEP", "COEP correctamente configurado.");
+  return warning("COEP", "COEP débil.");
 }
 
-// CORS (Cross-Origin Resource Sharing)
 function checkCORS(headers) {
-    const value = headers["access-control-allow-origin"];
-    if (!value) {
-        return warning("CORS", "CORS missing (depends on API usage).");
-    }
-
-    if (value === "*" || value.includes("http")) {
-        return success("CORS", "CORS is configured.");
-    }
-
-    return warning("CORS", "CORS configuration may be restrictive.");
+  const value = headers["access-control-allow-origin"];
+  if (!value) return warning("CORS", "Falta Access-Control-Allow-Origin.");
+  if (value === "*" || value.includes("http"))
+    return success("CORS", "CORS configurado.");
+  return warning("CORS", "CORS restrictivo.");
 }
 
-// Cache-Control
 function checkCacheControl(headers) {
-    const value = headers["cache-control"];
-    if (!value) {
-        return warning("Cache-Control", "Cache-Control missing.");
-    }
-
-    if (value.includes("no-store") || value.includes("no-cache")) {
-        return success("Cache-Control", "Cache-Control is properly configured.");
-    }
-
-    return warning("Cache-Control", "Cache-Control may be too permissive.");
+  const value = headers["cache-control"];
+  if (!value) return warning("Cache-Control", "Falta Cache-Control.");
+  if (value.includes("no-store") || value.includes("no-cache"))
+    return success("Cache-Control", "Cache-Control correctamente configurado.");
+  return warning("Cache-Control", "Cache-Control permisivo.");
 }
 
 // ------------------------------------------------------
-// 3) Helpers para estados
+// 2) Helpers
 // ------------------------------------------------------
 
 function success(title, description) {
@@ -190,50 +111,76 @@ function danger(title, description) {
 }
 
 // ------------------------------------------------------
-// 4) Score basado en OWASP
+// 3)Mapa según importancia
+// ------------------------------------------------------
+
+const importance = {
+  hsts: "essential",
+  csp: "essential",
+  xfo: "essential",
+  xcto: "essential",
+  referrer: "essential",
+
+  permissions: "recommended",
+  corp: "recommended",
+  coop: "recommended",
+  coep: "recommended",
+
+  cors: "optional",
+  cache: "optional",
+};
+
+// ------------------------------------------------------
+// 4)Cálculo de Score
 // ------------------------------------------------------
 
 function calculateScore(results) {
-    const weights = {
-        success: 1,
-        warning: 0.5,
-        danger: 0
-    };
+  const weights = {
+    essential: { success: 3, warning: 1, danger: 0 },
+    recommended: { success: 2, warning: 1, danger: 0 },
+    optional: { success: 1, warning: 0.5, danger: 0 },
+  };
 
-    const total = Object.values(results)
-        .map(r => weights[r.status])
-        .reduce((a, b) => a + b, 0);
+  let total = 0;
+  let max = 0;
 
-    return Math.round((total / Object.keys(results).length) * 10);
+  for (const key in results) {
+    const item = results[key];
+    const level = importance[key] || "optional";
+    const w = weights[level];
+
+    total += w[item.status];
+    max += w["success"];
+  }
+
+  return Math.round((total / max) * 10);
 }
 
 // ------------------------------------------------------
-// 5) Recomendaciones inteligentes
+// 5) Recomendaciones
 // ------------------------------------------------------
 
 function generateRecommendations(results) {
-    const recs = [];  // recs = recommendations
-
+    const recs = [];
     for (const key in results) {
         const item = results[key];
-
-        if (item.status === "danger") {
-            recs.push({
-                title: `Fix ${item.title}`,
-                description: item.description,
-                icon: "⚠️"
+        if (item.status === "danger")
+            recs.push({ 
+              key,
+              title: `Reparar ${item.title}`, 
+              description: item.description, 
+              icon: "⚠️",
+              status: "danger",
             });
-        }
-
-        if (item.status === "warning") {
-            recs.push({
-                title: `Improve ${item.title}`,
-                description: item.description,
-                icon: "🔧"
+        if (item.status === "warning")
+            recs.push({ 
+              key,
+              title: `Mejorar ${item.title}`, 
+              description: item.description, 
+              icon: "🔧",
+              status: "warning",
             });
-        }
     }
-
     return recs;
 }
 
@@ -250,8 +197,6 @@ export function analyzeHeaders(headers) {
         referrer: checkReferrerPolicy(headers),
         permissions: checkPermissionsPolicy(headers),
         corp: checkCORP(headers),
-
-        // Recomendadas
         coop: checkCOOP(headers),
         coep: checkCOEP(headers),
         cors: checkCORS(headers),

@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 export default function ThemeToggle() {
 
     // Estado que controla si el modo oscuro está activo.
-    // false = modo claro (por defecto)
-    // true = modo oscuro
+    // false = modo claro
+    // true = modo oscuro (por defecto)
     const [darkMode, setDarkMode] = useState(true);
 
     // Este efecto se ejecuta cada vez que darkMode cambia.

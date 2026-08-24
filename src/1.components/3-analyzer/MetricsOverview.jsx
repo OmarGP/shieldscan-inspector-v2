@@ -5,10 +5,9 @@ export default function MetricsOverview({ url, totalHeaders }) {
                 w-full
                 max-w-125
                 lg:max-w-200
-                bg-[--bg-card]
-                border border-[--border-soft]
+                border
                 p-4 rounded-lg
-                text-[--text-main]
+                text-text-main
                 flex flex-col gap-3
             "
         >
@@ -16,7 +15,7 @@ export default function MetricsOverview({ url, totalHeaders }) {
 
             <div className="flex flex-col gap-1">
                 <p>
-                    <strong>URL de web:</strong>{" "}
+                    <strong className="notranslate">URL de la web:</strong>{" "}
                     {url || "No se ha analizado ninguna URL"}
                 </p>
 

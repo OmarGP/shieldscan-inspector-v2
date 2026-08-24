@@ -5,17 +5,24 @@ import CodeGeneratorSidebar from "./1.components/4-sidebar/CodeGeneratorSidebar"
 
 export default function App() {
     const [rawHeaders, setRawHeaders] = useState("");
+    const [analysis, setAnalysis] = useState(null);
 
     return (
         <MainLayout>
             {/* Columna 1 + 2 */}
             <div className="lg:col-span-5">
-                <AnalyzerPanel setRawHeaders={setRawHeaders} />
+                <AnalyzerPanel 
+                    setRawHeaders={setRawHeaders}
+                    setAnalysisFromApp={setAnalysis}
+                 />
             </div>
 
             {/* Columna 3 */}
             <div className="lg:col-span-2">
-                <CodeGeneratorSidebar rawHeaders={rawHeaders} />
+                <CodeGeneratorSidebar 
+                    rawHeaders={rawHeaders} 
+                    results={analysis?.results}
+                />
             </div>
         </MainLayout>
     );

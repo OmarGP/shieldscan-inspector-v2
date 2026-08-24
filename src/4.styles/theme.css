@@ -67,3 +67,9 @@ html, body, button, input, div, section {
   --color-bg-hover-strong: var(--bg-hover-strong);
   --color-accent-cyan: var(--accent-cyan);
 }
+
+@layer utilities {
+  .fade-bottom {
+    background: linear-gradient(to top, var(--bg-panel), transparent);
+  }
+}

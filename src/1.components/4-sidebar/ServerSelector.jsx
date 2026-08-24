@@ -5,7 +5,7 @@ export default function ServerSelector({ value, onChange }) {
     return (
         <div className="flex flex-col gap-2">
             <label className="text-sm text-[--text-secondary]">
-                Select server:
+                Selecciona servidor:
             </label>
 
             <select
