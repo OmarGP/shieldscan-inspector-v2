@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect } from "react";
 import ClearButton from "./ClearButton";
-import { parseHeadersText } from "../../3.utils/parseHeaders.js"
+import { parseHeadersText } from "../../2.utils/parseHeaders.js"
 
 /* ---------------------------------------------------------
    COMPONENTE PRINCIPAL

@@ -55,7 +55,7 @@ export default function SearchBar({ setHeadersFromUser, setUrl }) {
           className="
             w-full px-4 py-2
             text-text-main
-            placeholder:text-placeholder-color
+            placeholder:text-slate-400 
             focus:outline-none
           "
         />

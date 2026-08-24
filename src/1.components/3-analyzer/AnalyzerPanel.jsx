@@ -8,7 +8,7 @@ import MetricsOverview from "./MetricsOverview";
 import SecurityScoreBadge from "./SecurityScoreBadge";
 import SecurityCardsGrid from "./SecurityCardsGrid";
 import RecommendationsBox from "./RecommendationsBox";
-import { analyzeHeaders } from "../../3.utils/headerAnalysis";
+import { analyzeHeaders } from "../../2.utils/headerAnalysis";
 
 export default function AnalyzerPanel({ setRawHeaders, setAnalysisFromApp }) {
   const [headersFromUser, setHeadersFromUser] = useState({});

@@ -2,7 +2,7 @@ import { useState } from "react";
 import ServerSelector from "./ServerSelector";
 import CodeBlock from "./CodeBlock";
 import CopyButton from "./CopyButton";
-import { generateConfig } from "../../3.utils/generateConfig";
+import { generateConfig } from "../../2.utils/generateConfig";
 
 export default function CodeGeneratorSidebar({ rawHeaders, results }) {
   const [server, setServer] = useState("apache");
