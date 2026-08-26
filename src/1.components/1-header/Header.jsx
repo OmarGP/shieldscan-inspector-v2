@@ -7,11 +7,11 @@ export default function Header() {
             className="
                 w-full
                 px-6 py-4
-                bg-[--bg-panel]          /* Fondo del header según el modo */
-                text-[--text-main]
-                border-b border-[--border-soft]
+                bg-bg-panel
+                text-text-main
+                border-b
                 flex justify-between items-center
-                transition-all duration-300     /* Fade suave entre modos */
+                transition-all duration-300
             "
         >
             <Brand />

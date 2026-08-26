@@ -34,19 +34,19 @@ export default function ThemeToggle() {
 
             // Clases Tailwind + variables CSS para estilos dinámicos.
             className="
-                flex items-center gap-2      /* Ícono + texto alineados horizontalmente */
-                px-3 py-2                    /* Padding interno del botón */
-                rounded-md                   /* Bordes redondeados */
-                bg-bg-card                   /* Fondo del botón según el modo */
-                text-text-main               /* Color del texto según el modo */
-                border border-border-soft    /* Borde suave según el modo */
+                flex items-center gap-2
+                px-3 py-2
+                rounded-md
+                bg-bg-card
+                text-text-main
+                border border-border-soft
 
-                hover:bg-bg-hover-strong     /* Color de fondo al pasar el mouse */
-                hover:text-accent-cyan       /* Texto e ícono cambian a cian en hover */
-                hover:border-accent-cyan     /* Borde se ilumina en hover */
+                hover:bg-bg-hover-strong
+                hover:text-accent-cyan
+                hover:border-accent-cyan
 
-                transition-all duration-200       /* Animación suave para hover y cambios */
-                cursor-pointer                   /* Cursor de botón */
+                transition-all duration-200
+                cursor-pointer
             "
         >
             {/* Ícono dinámico: sol para modo claro, luna para modo oscuro */}

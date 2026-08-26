@@ -8,14 +8,13 @@ export default function MainLayout({ children }) {
     <div
         className="
                 min-h-screen
-                bg-[--bg-main]
-                text-[--text-main]
+                bg-bg-main
+                text-text-main
                 transition-colors duration-300
             "
                 >
         {/* Header global */}
             <Header />
-
         {/* Contenido principal */}
         <main
             className="

@@ -4,9 +4,9 @@ export default function Brand() {
     return (
         <div
             className="
-                flex              /* Activa flexbox para alinear elementos */
-                items-center      /* Centra verticalmente el logo y el texto */
-                gap-3             /* Espacio horizontal entre logo y texto */
+                flex
+                items-center
+                gap-3
             "
         >
             <img 
@@ -15,17 +15,17 @@ export default function Brand() {
                 className="
                     h-16
                     w-16
-                    object-contain /* Mantiene proporción sin recortar */
-                    shrink-0       /* Evita que el logo se reduzca en flex */
+                    object-contain
+                    shrink-0
                 "
             />
 
             <div className="leading-tight">
                 <h1
                     className="
-                        text-xl            /* Tamaño grande para el título */
-                        font-bold          /* Fuente en negrita para destacar */
-                        text-[--text-main] /* Color principal */
+                        text-xl
+                        font-bold
+                        text-text-main
                     "
                 >
                     <p className="notranslate">ShieldScan Inspector</p>
@@ -33,8 +33,8 @@ export default function Brand() {
 
                 <p
                     className="
-                        text-sm                 /* Texto pequeño */
-                        text-[--text-secondary] /* Color secundario */
+                        text-sm
+                        text-text-secondary
                     "
                 >
                     Audita · Protege · Refuerza.
