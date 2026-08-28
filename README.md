@@ -1,16 +1,69 @@
-# React + Vite
+# ShieldScan Inspector
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ShieldScan Inspector es una aplicación web desarrollada con **React + Vite** que permite analizar cabeceras HTTP y generar un informe claro sobre el nivel de seguridad de una configuración web. Está orientada a entornos donde se requiere validar rápidamente si un servidor cumple buenas prácticas de seguridad.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Instalación
 
-## React Compiler
+> Los comandos de instalación funcionan en cualquier terminal con Git y Node.js:
+> PowerShell, Bash, CMD, Windows Terminal, Git Bash o WSL.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Para ejecutar la aplicación:
 
-## Expanding the ESLint configuration
+1. Instalar dependencias:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    npm install
+
+2. Ejecutar en modo de desarrollo:
+
+    npm run dev
+
+3. Acceder a la app:
+
+    http://localhost:5173
+
+
+## ¿Qué hace la aplicación?
+
+ShieldScan Inspector permite analizar cabeceras HTTP de dos formas:
+
+    ► Pegando directamente un bloque de cabeceras HTTP en el panel de entrada.
+
+    ► Introduciendo una URL y pulsando el botón Analizar, para obtener las cabeceras automáticamente.
+
+La aplicación:
+
+    ► Identifica cabeceras:
+
+        ○ Correctamente configuradas
+
+        ○ Ausentes
+
+        ○ Mal configuradas
+
+► Genera un informe visual con el estado de cada cabecera.
+
+► Muestra recomendaciones de mejora basadas en buenas prácticas OWASP.
+
+► Incluye ejemplos precargados (seguro y vulnerable) para comparar configuraciones.
+
+
+## 📘 Cómo usarla
+
+1. Copia las cabeceras HTTP desde tu navegador, servidor o herramienta de análisis;
+   o introduce la URL de la página web que deseas evaluar.
+
+2. Pega las cabeceras en el panel de entrada o escribe la URL en la barra de búsqueda.
+
+3. Si introduces una URL, pulsa Analizar.
+   Si pegas cabeceras, el análisis se ejecutará automáticamente.
+
+4. Revisa:
+
+    ► El estado individual de cada cabecera
+
+    ► Las recomendaciones de mejora
+
+    ► La puntuación global de seguridad
+
+Además, puedes utilizar los ejemplos precargados (seguro y vulnerable) para comparar configuraciones.
