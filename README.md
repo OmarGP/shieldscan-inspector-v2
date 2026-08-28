@@ -8,17 +8,45 @@ ShieldScan Inspector es una aplicación web desarrollada con **React + Vite** qu
 > Los comandos de instalación funcionan en cualquier terminal con Git y Node.js:
 > PowerShell, Bash, CMD, Windows Terminal, Git Bash o WSL.
 
-- Para ejecutar la aplicación:
+PUEDES INSTALAR EL PROYECTO DE DOS FORMAS:
 
-1. Instalar dependencias:
-
+### ✔ Opción A — Descargar el ZIP desde GitHub
+1. Descargar el ZIP del repositorio.
+2. Extraer el contenido.
+3. Instalar dependencias:
+        
     npm install
 
-2. Ejecutar en modo de desarrollo:
+4. Ejecutar en modo desarrollo:
 
     npm run dev
 
-3. Acceder a la app:
+5. Acceder a la app:
+
+    http://localhost:5173
+
+### ✔ Opción B — Clonar el repositorio (opcional)
+Si prefieres obtener el proyecto mediante Git en lugar de descargar el ZIP:
+
+1. Clonar:
+
+    git clone https://github.com/OmarGP/shieldscan-inspector-v2.git
+
+Una vez clonado:
+
+2. Accede a la carpeta del proyecto:
+
+    cd shieldscan-inspector-v2
+
+3. Instala las dependencias:
+
+    npm install
+
+4. Ejecuta la aplicación:
+
+    npm run dev
+
+5. Acceder a la app:
 
     http://localhost:5173
 
